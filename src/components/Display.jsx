@@ -14,7 +14,7 @@ export default function Display({ value, history }) {
       </div>
       <div
         className="display__value"
-        style={{ fontSize: `${displayFontSize(value, 64)}px` }}
+        style={{ fontSize: `${displayFontSize(value, 46)}px` }}
       >
         <span>{value}</span>
         <span className="display__cursor" aria-hidden="true" />
