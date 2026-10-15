@@ -1,0 +1,209 @@
+/* ── Theme variables ─────────────────────────────────── */
+:root,
+:root[data-theme="light"] {
+  --c-body: #d9d2bf; /* beige */
+  --c-screen: #222326; /* dark */
+  --c-num: #e85d4f; /* coral red  */
+  --c-op: #6b8cae; /* gray-blue  */
+  --c-util: #8c7f72; /* gray-brown */
+  --c-screen-text: #e8e4d8;
+  --c-screen-history: #8a8a84;
+  --c-body-shadow: rgba(60, 50, 30, 0.25);
+  --c-key-shadow: rgba(0, 0, 0, 0.18);
+  --c-page: #cfc8b4;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --c-body: #222326;
+  --c-screen: #d9d2bf;
+  --c-screen-text: #222326;
+  --c-screen-history: #6f6a5c;
+  --c-body-shadow: rgba(0, 0, 0, 0.5);
+  --c-key-shadow: rgba(0, 0, 0, 0.35);
+  --c-page: #141518;
+  color-scheme: dark;
+}
+
+/* ── Base ────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: "Orbitron", system-ui, sans-serif;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  background: var(--c-page);
+  color: var(--c-screen-text);
+  touch-action: manipulation; /* prevent double-tap zoom */
+  transition: background 150ms ease;
+  overscroll-behavior: none;
+}
+
+.app {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top));
+  right: calc(12px + env(safe-area-inset-right));
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--c-body);
+  color: var(--c-screen);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--c-key-shadow);
+  transition:
+    transform 150ms ease,
+    background 150ms ease;
+  z-index: 10;
+}
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ── Calculator body ─────────────────────────────────── */
+.calculator {
+  width: 100%;
+  max-width: 360px;
+  background: var(--c-body);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow:
+    0 12px 40px var(--c-body-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition:
+    background 150ms ease,
+    box-shadow 150ms ease;
+}
+
+/* Fill the whole screen on small phones */
+@media (max-width: 420px) {
+  .calculator {
+    border-radius: 24px;
+    height: 100dvh;
+    max-width: none;
+  }
+}
+
+/* Compact landscape */
+@media (max-height: 480px) and (orientation: landscape) {
+  .calculator {
+    max-width: 560px;
+    flex-direction: row;
+    gap: 12px;
+    height: auto;
+  }
+  .display {
+    flex: 1;
+    min-height: 100%;
+  }
+  .keypad {
+    flex: 1.2;
+    height: auto;
+  }
+}
+
+/* ── Display ─────────────────────────────────────────── */
+.display {
+  background: var(--c-screen);
+  border-radius: 18px;
+  min-height: 96px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 4px;
+  overflow: hidden;
+  transition: background 150ms ease;
+}
+
+.display__value {
+  color: var(--c-screen-text);
+  font-size: 44px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  transition: font-size 100ms ease;
+}
+
+.display__history {
+  color: var(--c-screen-history);
+  font-size: 14px;
+  min-height: 18px;
+  white-space: nowrap;
+}
+
+/* ── Keypad ──────────────────────────────────────────── */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(48px, 1fr);
+  gap: 10px;
+  flex: 1;
+}
+
+.key {
+  border: none;
+  border-radius: 9999px; /* pill shape */
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  font-size: 22px;
+  color: #f5f1e8;
+  cursor: pointer;
+  min-height: 48px;
+  box-shadow: 0 3px 6px var(--c-key-shadow);
+  transition:
+    transform 150ms ease,
+    filter 150ms ease,
+    background 150ms ease;
+}
+
+.key:active {
+  transform: scale(0.95);
+}
+
+.key:focus-visible {
+  outline: 3px solid var(--c-op);
+  outline-offset: 2px;
+}
+
+.key--num {
+  background: var(--c-num);
+}
+.key--op {
+  background: var(--c-op);
+}
+.key--util {
+  background: var(--c-util);
+}
+
+.key--wide {
+  grid-column: span 2;
+}

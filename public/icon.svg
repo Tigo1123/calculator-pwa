@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- body -->
+  <rect x="96" y="40" width="320" height="432" rx="64" fill="#D9D2BF"/>
+  <!-- screen -->
+  <rect x="128" y="80" width="256" height="120" rx="28" fill="#222326"/>
+  <!-- screen text -->
+  <rect x="196" y="150" width="160" height="16" rx="8" fill="#8a8a84"/>
+  <!-- keys row: utils -->
+  <circle cx="160" cy="248" r="24" fill="#8C7F72"/>
+  <circle cx="232" cy="248" r="24" fill="#8C7F72"/>
+  <circle cx="304" cy="248" r="24" fill="#8C7F72"/>
+  <circle cx="376" cy="248" r="24" fill="#6B8CAE"/>
+  <!-- keys rows: numbers -->
+  <circle cx="160" cy="320" r="24" fill="#E85D4F"/>
+  <circle cx="232" cy="320" r="24" fill="#E85D4F"/>
+  <circle cx="304" cy="320" r="24" fill="#E85D4F"/>
+  <circle cx="376" cy="320" r="24" fill="#6B8CAE"/>
+  <circle cx="160" cy="392" r="24" fill="#E85D4F"/>
+  <rect x="232" y="368" width="96" height="48" rx="24" fill="#E85D4F"/>
+  <circle cx="376" cy="392" r="24" fill="#6B8CAE"/>
+</svg>

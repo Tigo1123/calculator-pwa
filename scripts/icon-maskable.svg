@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- maskable: safe zone padding, full-bleed background -->
+  <rect width="512" height="512" fill="#D9D2BF"/>
+  <rect x="136" y="80" width="240" height="352" rx="56" fill="#EFE9DA"/>
+  <rect x="164" y="112" width="184" height="92" rx="22" fill="#222326"/>
+  <rect x="224" y="168" width="120" height="14" rx="7" fill="#8a8a84"/>
+  <circle cx="190" cy="252" r="20" fill="#8C7F72"/>
+  <circle cx="250" cy="252" r="20" fill="#8C7F72"/>
+  <circle cx="310" cy="252" r="20" fill="#8C7F72"/>
+  <circle cx="366" cy="252" r="20" fill="#6B8CAE"/>
+  <circle cx="190" cy="316" r="20" fill="#E85D4F"/>
+  <circle cx="250" cy="316" r="20" fill="#E85D4F"/>
+  <circle cx="310" cy="316" r="20" fill="#E85D4F"/>
+  <circle cx="366" cy="316" r="20" fill="#6B8CAE"/>
+  <circle cx="190" cy="380" r="20" fill="#E85D4F"/>
+  <rect x="230" y="360" width="120" height="40" rx="20" fill="#E85D4F"/>
+  <circle cx="366" cy="380" r="20" fill="#6B8CAE"/>
+</svg>
