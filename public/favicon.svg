@@ -1,15 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect x="12" y="4" width="40" height="56" rx="10" fill="#D9D2BF"/>
-  <rect x="17" y="10" width="30" height="15" rx="4" fill="#222326"/>
-  <circle cx="20" cy="32" r="3.4" fill="#8C7F72"/>
-  <circle cx="28" cy="32" r="3.4" fill="#8C7F72"/>
-  <circle cx="36" cy="32" r="3.4" fill="#8C7F72"/>
-  <circle cx="44" cy="32" r="3.4" fill="#6B8CAE"/>
-  <circle cx="20" cy="42" r="3.4" fill="#E85D4F"/>
-  <circle cx="28" cy="42" r="3.4" fill="#E85D4F"/>
-  <circle cx="36" cy="42" r="3.4" fill="#E85D4F"/>
-  <circle cx="44" cy="42" r="3.4" fill="#6B8CAE"/>
-  <circle cx="20" cy="52" r="3.4" fill="#E85D4F"/>
-  <rect x="25" y="48.5" width="15" height="7" rx="3.5" fill="#E85D4F"/>
-  <circle cx="44" cy="52" r="3.4" fill="#6B8CAE"/>
+  <defs>
+    <clipPath id="fav-squircle">
+      <rect width="64" height="64" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#fav-squircle)">
+    <rect width="64" height="64" fill="#17181A"/>
+
+    <rect x="0" y="0" width="31" height="31" fill="#2C2C2E"/>
+    <rect x="33" y="0" width="31" height="31" fill="#2C2C2E"/>
+    <rect x="0" y="33" width="31" height="31" fill="#2C2C2E"/>
+    <rect x="33" y="33" width="31" height="31" fill="#FF9500"/>
+
+    <!-- Plus -->
+    <line x1="9" y1="15.5" x2="22" y2="15.5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <line x1="15.5" y1="9" x2="15.5" y2="22" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Minus -->
+    <line x1="42" y1="15.5" x2="55" y2="15.5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Multiply -->
+    <line x1="11" y1="44" x2="20" y2="53" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="44" x2="11" y2="53" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Equals -->
+    <line x1="42" y1="46" x2="55" y2="46" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <line x1="42" y1="51" x2="55" y2="51" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  </g>
 </svg>

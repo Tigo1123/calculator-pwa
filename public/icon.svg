@@ -1,21 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- body -->
-  <rect x="96" y="40" width="320" height="432" rx="64" fill="#D9D2BF"/>
-  <!-- screen -->
-  <rect x="128" y="80" width="256" height="120" rx="28" fill="#222326"/>
-  <!-- screen text -->
-  <rect x="196" y="150" width="160" height="16" rx="8" fill="#8a8a84"/>
-  <!-- keys row: utils -->
-  <circle cx="160" cy="248" r="24" fill="#8C7F72"/>
-  <circle cx="232" cy="248" r="24" fill="#8C7F72"/>
-  <circle cx="304" cy="248" r="24" fill="#8C7F72"/>
-  <circle cx="376" cy="248" r="24" fill="#6B8CAE"/>
-  <!-- keys rows: numbers -->
-  <circle cx="160" cy="320" r="24" fill="#E85D4F"/>
-  <circle cx="232" cy="320" r="24" fill="#E85D4F"/>
-  <circle cx="304" cy="320" r="24" fill="#E85D4F"/>
-  <circle cx="376" cy="320" r="24" fill="#6B8CAE"/>
-  <circle cx="160" cy="392" r="24" fill="#E85D4F"/>
-  <rect x="232" y="368" width="96" height="48" rx="24" fill="#E85D4F"/>
-  <circle cx="376" cy="392" r="24" fill="#6B8CAE"/>
+  <defs>
+    <clipPath id="squircle">
+      <rect width="512" height="512" rx="115"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircle)">
+    <!-- Base dark background for divider grid lines -->
+    <rect width="512" height="512" fill="#17181A"/>
+
+    <!-- Quadrants (4px divider grid) -->
+    <!-- Top-Left: Dark grey -->
+    <rect x="0" y="0" width="254" height="254" fill="#2C2C2E"/>
+    <!-- Top-Right: Dark grey -->
+    <rect x="258" y="0" width="254" height="254" fill="#2C2C2E"/>
+    <!-- Bottom-Left: Dark grey -->
+    <rect x="0" y="258" width="254" height="254" fill="#2C2C2E"/>
+    <!-- Bottom-Right: Iconic Calculator Orange -->
+    <rect x="258" y="258" width="254" height="254" fill="#FF9500"/>
+
+    <!-- Symbols -->
+    <!-- Top-Left: Plus (+) -->
+    <line x1="77" y1="127" x2="177" y2="127" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+    <line x1="127" y1="77" x2="127" y2="177" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+
+    <!-- Top-Right: Minus (−) -->
+    <line x1="335" y1="127" x2="435" y2="127" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+
+    <!-- Bottom-Left: Multiply (×) -->
+    <line x1="92" y1="350" x2="162" y2="420" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+    <line x1="162" y1="350" x2="92" y2="420" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+
+    <!-- Bottom-Right: Equals (=) -->
+    <line x1="335" y1="365" x2="435" y2="365" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+    <line x1="335" y1="407" x2="435" y2="407" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+  </g>
 </svg>
