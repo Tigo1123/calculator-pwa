@@ -1,17 +1,16 @@
 import { useCallback } from "react";
 
-/** A single pill-shaped key. */
-export default function Key({ id, label, kind, span, onPress, aria }) {
+/** A single circular key with a short mobile haptic. */
+export default function Key({ label, kind, onPress, aria, className = "" }) {
   const handle = useCallback(() => {
-    // Light haptic feedback on supported mobile devices
     if (navigator.vibrate) navigator.vibrate(10);
-    onPress();
+    onPress?.();
   }, [onPress]);
 
   return (
     <button
       type="button"
-      className={`key key--${kind}${span === 2 ? " key--wide" : ""}`}
+      className={`key key--${kind} ${className}`.trim()}
       onClick={handle}
       aria-label={aria}
     >

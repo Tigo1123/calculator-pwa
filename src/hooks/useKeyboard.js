@@ -8,6 +8,8 @@ export function useKeyboard({
   clear,
   negate,
   backspace,
+  parentheses,
+  percent,
 }) {
   useEffect(() => {
     const handler = (e) => {
@@ -20,6 +22,12 @@ export function useKeyboard({
       else if (k === "/") {
         e.preventDefault();
         inputOperator("÷");
+      } else if (k === "(" || k === ")") {
+        e.preventDefault();
+        parentheses?.();
+      } else if (k === "%") {
+        e.preventDefault();
+        percent?.();
       } else if (k === "Enter" || k === "=") {
         e.preventDefault();
         equals();
@@ -28,5 +36,14 @@ export function useKeyboard({
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [inputDigit, inputOperator, equals, clear, negate, backspace]);
+  }, [
+    inputDigit,
+    inputOperator,
+    equals,
+    clear,
+    negate,
+    backspace,
+    parentheses,
+    percent,
+  ]);
 }

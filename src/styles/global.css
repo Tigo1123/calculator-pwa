@@ -1,27 +1,30 @@
 /* ── Theme variables ─────────────────────────────────── */
 :root,
 :root[data-theme="light"] {
-  --c-body: #d9d2bf; /* beige */
-  --c-screen: #222326; /* dark */
-  --c-num: #e85d4f; /* coral red  */
-  --c-op: #6b8cae; /* gray-blue  */
+  --c-page: #d9d2bf; /* beige app background */
+  --c-body: #d9d2bf;
+  --c-screen: #d9d2bf;
+  --c-num: #e85d4f; /* coral red */
+  --c-op: #6b8cae; /* gray-blue */
   --c-util: #8c7f72; /* gray-brown */
-  --c-screen-text: #e8e4d8;
-  --c-screen-history: #8a8a84;
-  --c-body-shadow: rgba(60, 50, 30, 0.25);
-  --c-key-shadow: rgba(0, 0, 0, 0.18);
-  --c-page: #cfc8b4;
+  --c-screen-text: #222326; /* dark text for display and toolbar */
+  --c-screen-history: rgba(34, 35, 38, 0.6); /* 60% opacity */
+  --c-divider: rgba(34, 35, 38, 0.15); /* 15% opacity */
+  --c-key-shadow: rgba(0, 0, 0, 0.12);
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
+  --c-page: #222326; /* dark app background */
   --c-body: #222326;
-  --c-screen: #d9d2bf;
-  --c-screen-text: #222326;
-  --c-screen-history: #6f6a5c;
-  --c-body-shadow: rgba(0, 0, 0, 0.5);
+  --c-screen: #222326;
+  --c-num: #e85d4f; /* coral red */
+  --c-op: #6b8cae; /* gray-blue */
+  --c-util: #8c7f72; /* gray-brown */
+  --c-screen-text: #f5f1e8; /* light text for display and toolbar */
+  --c-screen-history: rgba(245, 241, 232, 0.6); /* 60% opacity */
+  --c-divider: rgba(245, 241, 232, 0.15); /* 15% opacity */
   --c-key-shadow: rgba(0, 0, 0, 0.35);
-  --c-page: #141518;
   color-scheme: dark;
 }
 
@@ -36,194 +39,230 @@
 html,
 body,
 #root {
+  width: 100%;
   height: 100%;
+  min-height: 100dvh;
+  background-color: var(--c-page);
+  overflow: hidden;
 }
 
 body {
-  font-family: "Orbitron", system-ui, sans-serif;
+  font-family: "Orbitron", system-ui, -apple-system, sans-serif;
   font-weight: 400;
   font-variant-numeric: tabular-nums;
-  background: var(--c-page);
+  background-color: var(--c-page);
   color: var(--c-screen-text);
-  touch-action: manipulation; /* prevent double-tap zoom */
-  transition: background 150ms ease;
+  touch-action: manipulation;
+  transition: background-color 150ms ease, color 150ms ease;
   overscroll-behavior: none;
 }
 
+/* ── Layout ──────────────────────────────────────────── */
 .app {
+  width: 100%;
+  height: 100dvh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
-  position: relative;
-}
-
-/* ── Theme toggle: small circle attached to the calculator's top-right corner, above the display ── */
-.theme-toggle {
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background: var(--c-body);
-  color: var(--c-screen);
-  font-size: 17px;
-  cursor: pointer;
-  box-shadow: 0 2px 8px var(--c-key-shadow);
-  transition:
-    transform 150ms ease,
-    background 150ms ease;
-  z-index: 10;
-}
-
-/* Anchored above the calculator, aligned with its right edge — never overlapping content */
-.theme-toggle-anchor {
-  width: 100%;
-  max-width: 360px;
-  display: flex;
   justify-content: flex-end;
-  margin: 6px 0 10px;
+  background-color: var(--c-page);
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+    0 env(safe-area-inset-left, 0px);
+  overflow: hidden;
 }
 
-@media (max-width: 420px) {
-  .theme-toggle-anchor {
-    max-width: none;
-    padding: 0 14px;
-    margin: 8px 0 2px;
-  }
-}
-.theme-toggle:active {
-  transform: scale(0.95);
-}
-
-/* ── Calculator body ─────────────────────────────────── */
-/* Mobile-first: full screen, no outer frame. Card look only on large screens. */
+/* Centered calculator column, max 400px on large screens */
 .calculator {
   width: 100%;
-  max-width: 360px;
-  background: var(--c-body);
-  border-radius: 24px;
-  padding: 16px;
-  box-shadow:
-    0 12px 40px var(--c-body-shadow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  max-width: 400px;
+  height: 100%;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition:
-    background 150ms ease,
-    box-shadow 150ms ease;
-}
-
-/* Full-bleed on phones, centered vertically when space remains.
-   Height = viewport minus the theme-toggle row above it — no scroll ever. */
-@media (max-width: 420px) {
-  .calculator {
-    border-radius: 0;
-    box-shadow: none;
-    max-width: none;
-    padding: 0 14px;
-    height: calc(100dvh - env(safe-area-inset-top) - 58px);
-    justify-content: center;
-    gap: 16px;
-  }
-  .display {
-    height: clamp(96px, 21dvh, 150px);
-    margin-bottom: 10px;
-  }
-}
-
-/* Compact landscape: side-by-side, compact display */
-@media (max-height: 480px) and (orientation: landscape) {
-  .calculator {
-    max-width: 560px;
-    flex-direction: row;
-    gap: 12px;
-    height: auto;
-  }
-  .display {
-    height: auto;
-    flex: 1;
-    min-height: 100%;
-  }
-  .keypad {
-    flex: 1.2;
-    height: auto;
-  }
-  .key {
-    aspect-ratio: auto;
-  }
+  justify-content: flex-end;
+  margin: 0 auto;
+  /* Margins: side ≈ 4.7%, bottom ≈ safe-area + 3% */
+  padding-left: clamp(16px, 4.7vw, 19px);
+  padding-right: clamp(16px, 4.7vw, 19px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 3dvh);
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  container-type: inline-size;
 }
 
 /* ── Display ─────────────────────────────────────────── */
+/* Generous height, fills all remaining top area, empty at top, bottom aligned */
 .display {
-  background: var(--c-screen);
-  border-radius: 18px;
-  /* ~23% of viewport height on phones, fixed fallback elsewhere */
-  height: clamp(110px, 23dvh, 180px);
-  flex: none;
-  padding: 14px 18px;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  gap: 4px;
+  width: 100%;
+  padding: clamp(8px, 2vh, 16px) 4px clamp(12px, 2.5vh, 20px);
+  gap: clamp(8px, 2vh, 16px);
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+}
+
+.display__history {
+  color: var(--c-screen-text);
+  opacity: 0.6;
+  font-size: clamp(18px, 4.8vw, 24px);
+  font-size: clamp(18px, 4.8cqi, 24px);
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  min-height: 28px;
+  line-height: 1.3;
+  white-space: nowrap;
   overflow: hidden;
-  transition: background 150ms ease;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: right;
+  user-select: none;
 }
 
 .display__value {
-  /* plain (non-slashed) zero: Orbitron draws 0 with a slash, so use system digits here */
-  font-family: system-ui, "Segoe UI", sans-serif;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
   color: var(--c-screen-text);
-  font-size: 34px;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.15;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   transition: font-size 100ms ease;
+  user-select: all;
 }
 
-.display__history {
-  color: var(--c-screen-history);
-  font-size: 13px;
-  opacity: 0.6;
-  min-height: 16px;
-  white-space: nowrap;
+.display__cursor {
+  display: inline-block;
+  width: 2.5px;
+  height: 0.85em;
+  margin-left: 4px;
+  background-color: var(--c-op);
+  border-radius: 1px;
+  animation: cursor-blink 1.05s steps(2, start) infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── Toolbar ─────────────────────────────────────────── */
+.calculator__toolbar {
+  width: 100%;
+  min-height: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.toolbar-btn,
+.theme-toggle,
+.toolbar-key {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--c-screen-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: none;
+  transition: transform 120ms ease, background 150ms ease, color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toolbar-btn svg,
+.toolbar-key svg {
+  display: block;
+  pointer-events: none;
+}
+
+.toolbar-btn:active,
+.theme-toggle:active,
+.toolbar-key:active {
+  transform: scale(0.92);
+  background: color-mix(in srgb, var(--c-screen-text) 14%, transparent);
+}
+
+.toolbar-btn:focus-visible,
+.theme-toggle:focus-visible,
+.toolbar-key:focus-visible {
+  outline: 2px solid var(--c-op);
+  outline-offset: 2px;
+}
+
+/* ── Divider ─────────────────────────────────────────── */
+.calculator__divider {
+  width: 100%;
+  height: 1px;
+  flex: 0 0 1px;
+  margin: 6px 0 14px;
+  background: var(--c-divider);
+  border: none;
 }
 
 /* ── Keypad ──────────────────────────────────────────── */
 .keypad {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* fixed pill height ≈ 0.85 × column width (gap 12px × 3 between the 4 cols) */
-  grid-auto-rows: calc((100% - 36px) / 4 * 0.85);
-  gap: 12px;
+  /* gap ≈ 3.5% of width */
+  gap: clamp(8px, 3.2vw, 13px);
+  gap: clamp(8px, 3.2cqi, 13px);
   flex: none;
 }
 
+/* ── Key ─────────────────────────────────────────────── */
 .key {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
   border: none;
-  border-radius: 9999px; /* pill shape */
   font-family: inherit;
   font-variant-numeric: tabular-nums;
-  font-size: 22px;
+  /* font size ≈ 38% of button diameter (diameter ≈ 20% width => font-size ≈ 7.6%) */
+  font-size: clamp(24px, 7.6vw, 30.5px);
+  font-size: clamp(24px, 7.6cqi, 30.5px);
   color: #f5f1e8;
   cursor: pointer;
-  min-height: 48px;
-  box-shadow: 0 3px 6px var(--c-key-shadow);
-  transition:
-    transform 150ms ease,
-    filter 150ms ease,
-    background 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px var(--c-key-shadow);
+  user-select: none;
+  touch-action: manipulation;
+  transition: transform 100ms ease, filter 120ms ease;
 }
 
 .key:active {
-  transform: scale(0.95);
+  transform: scale(0.94);
+  filter: brightness(1.12);
 }
 
 .key:focus-visible {
@@ -231,16 +270,44 @@ body {
   outline-offset: 2px;
 }
 
+/* Number and dot buttons: coral */
 .key--num {
-  background: var(--c-num);
-}
-.key--op {
-  background: var(--c-op);
-}
-.key--util {
-  background: var(--c-util);
+  background-color: var(--c-num);
 }
 
-.key--wide {
-  grid-column: span 2;
+/* Operations and = buttons: blue */
+.key--op {
+  background-color: var(--c-op);
+}
+
+/* AC, ( ), %, +/− buttons: brownish-gray / taupe */
+.key--util {
+  background-color: var(--c-util);
+}
+
+/* Toolbar key override */
+.key--toolbar {
+  background: transparent;
+  box-shadow: none;
+  aspect-ratio: auto;
+  color: var(--c-screen-text);
+}
+
+/* ── Responsive adjustments ──────────────────────────── */
+@media (min-width: 401px) {
+  .calculator {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}
+
+/* Ensure compact viewports fit without any scrolling */
+@media (max-height: 660px) {
+  .calculator__divider {
+    margin: 4px 0 8px;
+  }
+  .keypad {
+    gap: clamp(8px, 3vw, 11px);
+    gap: clamp(8px, 3cqi, 11px);
+  }
 }

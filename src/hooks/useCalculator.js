@@ -13,11 +13,22 @@ export function useCalculator() {
     (op) => dispatch({ type: "OPERATOR", payload: op }),
     [],
   );
+  const parentheses = useCallback(() => dispatch({ type: "PARENTHESES" }), []);
   const equals = useCallback(() => dispatch({ type: "EQUALS" }), []);
   const percent = useCallback(() => dispatch({ type: "PERCENT" }), []);
   const negate = useCallback(() => dispatch({ type: "NEGATE" }), []);
   const clear = useCallback(() => dispatch({ type: "CLEAR" }), []);
   const backspace = useCallback(() => dispatch({ type: "BACKSPACE" }), []);
 
-  return { state, inputDigit, inputOperator, equals, percent, negate, clear, backspace };
+  return {
+    state,
+    inputDigit,
+    inputOperator,
+    equals,
+    percent,
+    negate,
+    clear,
+    backspace,
+    parentheses,
+  };
 }

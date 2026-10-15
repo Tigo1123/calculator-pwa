@@ -1,6 +1,6 @@
 import Key from "./Key";
 
-/** Grid of keys, 4 cols × 5 rows. Zero spans two columns. */
+/** Phone-style 4 × 5 circular keypad. */
 export default function Keypad({
   onDigit,
   onOperator,
@@ -8,6 +8,7 @@ export default function Keypad({
   onPercent,
   onNegate,
   onClear,
+  onParentheses,
 }) {
   const rows = [
     [
@@ -19,11 +20,11 @@ export default function Keypad({
         aria: "Clear all",
       },
       {
-        id: "negate",
-        label: "+/−",
+        id: "parentheses",
+        label: "( )",
         kind: "util",
-        onPress: onNegate,
-        aria: "Toggle sign",
+        onPress: onParentheses,
+        aria: "Parentheses",
       },
       {
         id: "percent",
@@ -132,10 +133,16 @@ export default function Keypad({
     ],
     [
       {
+        id: "negate",
+        label: "+/−",
+        kind: "util",
+        onPress: onNegate,
+        aria: "Toggle sign",
+      },
+      {
         id: "0",
-        label: "∅",
+        label: "0",
         kind: "num",
-        span: 2,
         onPress: () => onDigit("0"),
         aria: "Zero",
       },
@@ -158,8 +165,8 @@ export default function Keypad({
 
   return (
     <div className="keypad" role="group" aria-label="Calculator keypad">
-      {rows.flat().map((k) => (
-        <Key key={k.id} {...k} />
+      {rows.flat().map((key) => (
+        <Key key={key.id} {...key} />
       ))}
     </div>
   );

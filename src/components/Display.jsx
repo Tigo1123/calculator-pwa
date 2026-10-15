@@ -1,6 +1,6 @@
 import { displayFontSize } from "../utils/format";
 
-/** Result: big right-aligned value + small equation line. */
+/** Phone-style display: equation line above, large result + blinking cursor below. */
 export default function Display({ value, history }) {
   return (
     <div
@@ -14,9 +14,10 @@ export default function Display({ value, history }) {
       </div>
       <div
         className="display__value"
-        style={{ fontSize: `${displayFontSize(value)}px` }}
+        style={{ fontSize: `${displayFontSize(value, 64)}px` }}
       >
-        {value}
+        <span>{value}</span>
+        <span className="display__cursor" aria-hidden="true" />
       </div>
     </div>
   );
