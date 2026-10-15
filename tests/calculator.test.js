@@ -127,7 +127,7 @@ describe("reducer sequences", () => {
 
 describe("displayFontSize", () => {
   it("shrinks for long numbers", () => {
-    expect(displayFontSize("1234567")).toBe(44);
-    expect(displayFontSize("12345678901234")).toBeLessThan(30);
+    expect(displayFontSize("1234567")).toBe(34);
+    expect(displayFontSize("12345678901234")).toBeLessThan(22);
   });
 });

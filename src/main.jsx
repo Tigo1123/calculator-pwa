@@ -10,7 +10,10 @@ function App() {
   const { theme, toggle } = useTheme();
   return (
     <main className="app">
-      <ThemeToggle theme={theme} toggle={toggle} />
+      {/* anchor row keeps the toggle above the calculator's top-right corner */}
+      <div className="theme-toggle-anchor">
+        <ThemeToggle theme={theme} toggle={toggle} />
+      </div>
       <Calculator />
     </main>
   );

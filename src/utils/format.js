@@ -12,11 +12,11 @@ export function formatNumber(n) {
 }
 
 /** Font size (px) that shrinks as the display text grows. */
-export function displayFontSize(text, base = 44) {
+export function displayFontSize(text, base = 34) {
   if (!text) return base;
   const len = String(text).length;
   if (len <= 7) return base;
-  if (len <= 9) return base - 8;
-  if (len <= 12) return base - 14;
-  return base - 20;
+  if (len <= 9) return base - 7;
+  if (len <= 12) return base - 11;
+  return base - 16;
 }

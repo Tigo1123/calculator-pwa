@@ -53,6 +53,7 @@ body {
 .app {
   min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
@@ -60,17 +61,15 @@ body {
   position: relative;
 }
 
+/* ── Theme toggle: small circle attached to the calculator's top-right corner, above the display ── */
 .theme-toggle {
-  position: absolute;
-  top: calc(12px + env(safe-area-inset-top));
-  right: calc(12px + env(safe-area-inset-right));
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border: none;
   border-radius: 50%;
   background: var(--c-body);
   color: var(--c-screen);
-  font-size: 20px;
+  font-size: 17px;
   cursor: pointer;
   box-shadow: 0 2px 8px var(--c-key-shadow);
   transition:
@@ -78,11 +77,29 @@ body {
     background 150ms ease;
   z-index: 10;
 }
+
+/* Anchored above the calculator, aligned with its right edge — never overlapping content */
+.theme-toggle-anchor {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  justify-content: flex-end;
+  margin: 6px 0 10px;
+}
+
+@media (max-width: 420px) {
+  .theme-toggle-anchor {
+    max-width: none;
+    padding: 0 14px;
+    margin: 8px 0 2px;
+  }
+}
 .theme-toggle:active {
   transform: scale(0.95);
 }
 
 /* ── Calculator body ─────────────────────────────────── */
+/* Mobile-first: full screen, no outer frame. Card look only on large screens. */
 .calculator {
   width: 100%;
   max-width: 360px;
@@ -100,16 +117,25 @@ body {
     box-shadow 150ms ease;
 }
 
-/* Fill the whole screen on small phones */
+/* Full-bleed on phones, centered vertically when space remains.
+   Height = viewport minus the theme-toggle row above it — no scroll ever. */
 @media (max-width: 420px) {
   .calculator {
-    border-radius: 24px;
-    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
     max-width: none;
+    padding: 0 14px;
+    height: calc(100dvh - env(safe-area-inset-top) - 58px);
+    justify-content: center;
+    gap: 16px;
+  }
+  .display {
+    height: clamp(96px, 21dvh, 150px);
+    margin-bottom: 10px;
   }
 }
 
-/* Compact landscape */
+/* Compact landscape: side-by-side, compact display */
 @media (max-height: 480px) and (orientation: landscape) {
   .calculator {
     max-width: 560px;
@@ -118,6 +144,7 @@ body {
     height: auto;
   }
   .display {
+    height: auto;
     flex: 1;
     min-height: 100%;
   }
@@ -125,13 +152,18 @@ body {
     flex: 1.2;
     height: auto;
   }
+  .key {
+    aspect-ratio: auto;
+  }
 }
 
 /* ── Display ─────────────────────────────────────────── */
 .display {
   background: var(--c-screen);
   border-radius: 18px;
-  min-height: 96px;
+  /* ~23% of viewport height on phones, fixed fallback elsewhere */
+  height: clamp(110px, 23dvh, 180px);
+  flex: none;
   padding: 14px 18px;
   display: flex;
   flex-direction: column;
@@ -143,8 +175,11 @@ body {
 }
 
 .display__value {
+  /* plain (non-slashed) zero: Orbitron draws 0 with a slash, so use system digits here */
+  font-family: system-ui, "Segoe UI", sans-serif;
   color: var(--c-screen-text);
-  font-size: 44px;
+  font-size: 34px;
+  font-weight: 500;
   line-height: 1.1;
   white-space: nowrap;
   overflow: hidden;
@@ -155,8 +190,9 @@ body {
 
 .display__history {
   color: var(--c-screen-history);
-  font-size: 14px;
-  min-height: 18px;
+  font-size: 13px;
+  opacity: 0.6;
+  min-height: 16px;
   white-space: nowrap;
 }
 
@@ -164,9 +200,10 @@ body {
 .keypad {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(48px, 1fr);
-  gap: 10px;
-  flex: 1;
+  /* fixed pill height ≈ 0.85 × column width (gap 12px × 3 between the 4 cols) */
+  grid-auto-rows: calc((100% - 36px) / 4 * 0.85);
+  gap: 12px;
+  flex: none;
 }
 
 .key {
